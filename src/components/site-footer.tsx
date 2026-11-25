@@ -74,7 +74,8 @@ const SKILLS: { icon: LucideIcon; label: string; tone: string }[] = [
 ];
 
 export default function SiteFooter() {
-  const year = new Date().getFullYear();
+  // Static year avoids Next.js prerender error with `new Date()`
+  const year = 2026;
 
   return (
     <footer className="site-footer" aria-label="Site footer">
