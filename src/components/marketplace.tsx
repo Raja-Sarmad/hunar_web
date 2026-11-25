@@ -448,28 +448,24 @@ function Modal({
   );
 }
 
+const FALLBACK_CATEGORIES: CategoryInfo[] = CATEGORY_META.map((c, index) => ({
+  index,
+  name: c.name,
+  tone: c.tone,
+  icon: c.icon,
+  imageUrl: "",
+}));
+
 export default function Marketplace({
   services,
-  categories = CATEGORY_META.map((c, index) => ({
-    index,
-    name: c.name,
-    tone: c.tone,
-    icon: c.icon,
-  })),
+  categories = FALLBACK_CATEGORIES,
 }: {
   services: Service[];
   categories?: CategoryInfo[];
 }) {
   const { user, logout } = useAuth();
-  const categoryList =
-    categories.length > 0
-      ? categories
-      : CATEGORY_META.map((c, index) => ({
-          index,
-          name: c.name,
-          tone: c.tone,
-          icon: c.icon,
-        }));
+  const categoryList: CategoryInfo[] =
+    categories.length > 0 ? categories : FALLBACK_CATEGORIES;
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("");
   const [cat, setCat] = useState(-1);
